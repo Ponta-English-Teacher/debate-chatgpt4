@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Debate Practice with ChatGPT</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🎤 Debate Practice with ChatGPT</h1>
+
+  <label for="mainArgument">🗣️ Your Main Argument (Proposal + 2 Reasons)</label>
+  <div class="section-description">State your opinion and give two reasons. This is the basis of your debate.</div>
+  <textarea id="mainArgument" rows="6" placeholder="I believe school uniforms should be mandatory. First, they reduce bullying. Second, they promote unity."></textarea>
+  <button onclick="generateFeedback('mainArgument', 'opinion')">📝 Refine My Argument</button>
+  <button onclick="generateFeedback('mainArgument', 'grammar')">🔧 Fix Grammar & Clarity</button>
+  <button class="dictionary-btn" onclick="showDictionaryPopup()">📖 What Does It Mean?</button>
+  <div id="mainArgumentFeedback" class="feedback-box"></div>
+
+  <button onclick="generateChatGPTCounterargument()">🤖 Get ChatGPT’s Counterargument</button>
+  <div id="counterargumentBox" class="feedback-box"></div>
+
+  <label for="rebuttal">🛡️ Your Rebuttal (Respond to ChatGPT's Counterargument)</label>
+  <div class="section-description">Read the counterargument and write your rebuttal. Defend your opinion logically.</div>
+  <textarea id="rebuttal" rows="6" placeholder="Refute the opponent's point here..."></textarea>
+  <button onclick="generateFeedback('rebuttal', 'grammar')">🔧 Fix Grammar & Clarity</button>
+  <button class="dictionary-btn" onclick="showDictionaryPopup()">📖 What Does It Mean?</button>
+  <div id="rebuttalFeedback" class="feedback-box"></div>
+
+  <label for="conclusion">🎯 Closing Speech</label>
+  <div class="section-description">Summarize your opinion and rebuttal. Leave a strong final impression.</div>
+  <textarea id="conclusion" rows="6" placeholder="In conclusion, school uniforms are essential because..."></textarea>
+  <button onclick="generateFeedback('conclusion', 'opinion')">📝 Improve My Closing</button>
+  <button onclick="generateFeedback('conclusion', 'grammar')">🔧 Fix Grammar & Clarity</button>
+  <button class="dictionary-btn" onclick="showDictionaryPopup()">📖 What Does It Mean?</button>
+  <div id="conclusionFeedback" class="feedback-box"></div>
+
+  <button onclick="generateEvaluation()">📊 Evaluate My Debate</button>
+  <div id="evaluationBox" class="feedback-box"></div>
+
+  <button onclick="saveDataAsEditableHTML()">📀 Save as Debate Sheet (HTML)</button>
+
+  <!-- Dictionary Popup -->
+  <div id="dictionary-popup">
+    <p id="popup-meaning"></p>
+    <button id="popup-play">▶️ Play it</button>
+    <button id="popup-add">➕ Add to Glossary</button>
+    <button id="popup-close">❌ Close</button>
+  </div>
+
+  <h2>📚 Glossary</h2>
+  <div class="glossary-box">
+    <ul id="summary-content"></ul>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
+
