@@ -4,6 +4,12 @@ export default async function handler(req, res) {
     return;
   }
 
+  const accessCode = process.env.ACCESS_CODE;
+  if (!accessCode || req.headers["x-access-code"] !== accessCode) {
+    res.status(401).json({ error: "Invalid or missing access code." });
+    return;
+  }
+
   const { prompt } = req.body || {};
   if (!prompt) {
     res.status(400).json({ error: "Missing 'prompt' in request body." });
