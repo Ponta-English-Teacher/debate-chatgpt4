@@ -1,10 +1,48 @@
+// === Access code ===
+const accessCode = sessionStorage.getItem("debateAccessCode");
+const accessScreen = document.getElementById("access-screen");
+const appContent = document.getElementById("app-content");
+
+function showApp() {
+  accessScreen.hidden = true;
+  appContent.hidden = false;
+}
+
+async function validateAccessCode(code) {
+  const response = await fetch("/api/access", {
+    headers: { "x-access-code": code }
+  });
+  return response.ok;
+}
+
+if (accessCode) {
+  validateAccessCode(accessCode).then((valid) => {
+    if (valid) showApp();
+    else sessionStorage.removeItem("debateAccessCode");
+  });
+}
+
+document.getElementById("access-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const enteredCode = document.getElementById("access-code").value;
+  const valid = await validateAccessCode(enteredCode);
+  if (!valid) {
+    document.getElementById("access-error").textContent = "The access code is incorrect.";
+    return;
+  }
+  sessionStorage.setItem("debateAccessCode", enteredCode);
+  accessScreen.hidden = true;
+  appContent.hidden = false;
+});
+
 // === General OpenAI Chat Request (via backend) ===
 // フロントエンドからは /api/chat に投げるだけ。APIキーはサーバー側で管理。
 async function callOpenAI(prompt) {
   const response = await fetch("/api/chat", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "x-access-code": sessionStorage.getItem("debateAccessCode") || ""
     },
     body: JSON.stringify({ prompt })
   });
@@ -167,7 +205,8 @@ async function showDictionaryPopup() {
       const res = await fetch("/api/tts", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "x-access-code": sessionStorage.getItem("debateAccessCode") || ""
         },
         body: JSON.stringify({
           text: selectedText,
