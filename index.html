@@ -7,6 +7,18 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="access-screen" class="access-screen">
+    <div class="access-card">
+      <h1>🎤 Debate Practice with ChatGPT</h1>
+      <p>Enter the access code to begin.</p>
+      <form id="access-form">
+        <input id="access-code" type="password" autocomplete="off" required aria-label="Access code" />
+        <button type="submit">Enter</button>
+      </form>
+      <p id="access-error" class="access-error" role="alert"></p>
+    </div>
+  </div>
+  <main id="app-content" hidden>
   <h1>🎤 Debate Practice with ChatGPT</h1>
 
   <label for="mainArgument">🗣️ Your Main Argument (Proposal + 2 Reasons)</label>
@@ -53,6 +65,7 @@
     <ul id="summary-content"></ul>
   </div>
 
+  </main>
   <script src="app.js" defer></script>
 </body>
 </html>
