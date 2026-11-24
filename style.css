@@ -116,3 +116,27 @@ hr {
   background-color: #ccc;
   margin: 30px 0;
 }
+
+.access-screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #f4f7fb;
+  z-index: 10;
+}
+
+.access-card {
+  width: min(420px, 100%);
+  padding: 28px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 12%);
+  text-align: center;
+}
+
+.access-card h1 { margin-top: 0; }
+.access-card form { display: flex; gap: 8px; }
+.access-card input { flex: 1; padding: 10px; font-size: 1rem; }
+.access-error { min-height: 1.2em; color: #b00020; }
