@@ -5,6 +5,12 @@ export default async function handler(req, res) {
     return;
   }
 
+  const accessCode = process.env.ACCESS_CODE;
+  if (!accessCode || req.headers["x-access-code"] !== accessCode) {
+    res.status(401).json({ error: "Invalid or missing access code." });
+    return;
+  }
+
   const { text, voice } = req.body || {};
   if (!text) {
     res.status(400).json({ error: "Missing 'text' in request body." });
